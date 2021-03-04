@@ -1,6 +1,9 @@
 name: 'Install PHIVE Tools'
 author: 'Yuta Nagamiya'
 description: 'Installs PHIVE tools and uploads them to artifact store'
+branding:
+  icon: 'download'
+  color: 'purple'
 runs:
   using: 'composite'
   steps:
