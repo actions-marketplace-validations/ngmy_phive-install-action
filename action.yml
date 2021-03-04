@@ -8,28 +8,41 @@ runs:
   using: 'composite'
   steps:
     - name: 'Check out repository'
-      uses: 'actions/checkout@v2'
+      run: ./src/git/checkout.sh
+      shell: 'bash'
+      # TODO: When "uses" becomes available, replace the above with the following
+      # - name: 'Check out repository'
+      #   uses: 'actions/checkout@v2'
     - name: 'Install PHIVE'
-      uses: 'nick-invision/retry@v2'
-      with:
-        timeout_minutes: 10
-        max_attempts: 3
-        command: |
-          wget -O phive.phar https://phar.io/releases/phive.phar
-          wget -O phive.phar.asc https://phar.io/releases/phive.phar.asc
-          gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
-          gpg --verify phive.phar.asc phive.phar
+      run: ./src/utils/retry.sh ./src/phive/install.sh
+      shell: 'bash'
+      # TODO: When "uses" becomes available, replace the above with the following
+      #    - name: 'Install PHIVE'
+      #      uses: 'nick-invision/retry@v2'
+      #      with:
+      #        timeout_minutes: 10
+      #        max_attempts: 3
+      #        command: |
+      #          wget -O phive.phar https://phar.io/releases/phive.phar
+      #          wget -O phive.phar.asc https://phar.io/releases/phive.phar.asc
+      #          gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
+      #          gpg --verify phive.phar.asc phive.phar
     - name: 'Install PHIVE tools'
-      uses: 'nick-invision/retry@v2'
-      with:
-        timeout_minutes: 10
-        max_attempts: 3
-        command: |
-          yes | \
-          php phive.phar --no-progress install \
-            --copy
-    - name: 'Upload PHIVE tools to artifact store'
-      uses: 'actions/upload-artifact@master'
-      with:
-        name: 'tools'
-        path: 'tools'
+      run: ./src/utils/retry.sh ./src/phive/install-tools.sh
+      shell: 'bash'
+      # TODO: When "uses" becomes available, replace the above with the following
+      #    - name: 'Install PHIVE tools'
+      #      uses: 'nick-invision/retry@v2'
+      #      with:
+      #        timeout_minutes: 10
+      #        max_attempts: 3
+      #        command: |
+      #          yes | \
+      #          php phive.phar --no-progress install \
+      #            --copy
+      # TODO: When "uses" is available, add the following
+      #    - name: 'Upload PHIVE tools to artifact store'
+      #      uses: 'actions/upload-artifact@master'
+      #      with:
+      #        name: 'tools'
+      #        path: 'tools'
