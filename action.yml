@@ -1,0 +1,32 @@
+name: 'Install PHIVE Tools'
+author: 'Yuta Nagamiya'
+desctiption: 'Installs PHIVE tools and uploads them to artifact store'
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Check out repository'
+      uses: 'actions/checkout@v2'
+    - name: 'Install PHIVE'
+      uses: 'nick-invision/retry@v2'
+      with:
+        timeout_minutes: 10
+        max_attempts: 3
+        command: |
+          wget -O phive.phar https://phar.io/releases/phive.phar
+          wget -O phive.phar.asc https://phar.io/releases/phive.phar.asc
+          gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
+          gpg --verify phive.phar.asc phive.phar
+    - name: 'Install PHIVE tools'
+      uses: 'nick-invision/retry@v2'
+      with:
+        timeout_minutes: 10
+        max_attempts: 3
+        command: |
+          yes | \
+          php phive.phar --no-progress install \
+            --copy
+    - name: 'Upload PHIVE tools to artifact store'
+      uses: 'actions/upload-artifact@master'
+      with:
+        name: 'tools'
+        path: 'tools'
