@@ -1,4 +1,4 @@
-name: 'Install PHIVE Tools'
+name: 'Install PHIVE tools'
 author: 'Yuta Nagamiya'
 description: 'Installs PHIVE tools and uploads them to artifact store'
 branding:
