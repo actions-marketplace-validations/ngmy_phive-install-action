@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install tools
-        uses: ngmy/phive-install-action@0.6.0
+        uses: ngmy/phive-install-action@master
       - name: Upload tools to artifact store
         uses: actions/upload-artifact@master
         with:
