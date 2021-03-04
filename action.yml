@@ -1,6 +1,6 @@
 name: 'Install PHIVE Tools'
 author: 'Yuta Nagamiya'
-desctiption: 'Installs PHIVE tools and uploads them to artifact store'
+description: 'Installs PHIVE tools and uploads them to artifact store'
 runs:
   using: 'composite'
   steps:
