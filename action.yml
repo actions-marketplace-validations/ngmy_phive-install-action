@@ -8,13 +8,13 @@ runs:
   using: 'composite'
   steps:
     - name: 'Check out repository'
-      run: ./src/git/checkout.sh
+      run: ${{ github.action_path }}/src/git/checkout.sh
       shell: 'bash'
       # TODO: When "uses" becomes available, replace the above with the following
       # - name: 'Check out repository'
       #   uses: 'actions/checkout@v2'
     - name: 'Install PHIVE'
-      run: ./src/utils/retry.sh ./src/phive/install.sh
+      run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install.sh
       shell: 'bash'
       # TODO: When "uses" becomes available, replace the above with the following
       #    - name: 'Install PHIVE'
@@ -28,7 +28,7 @@ runs:
       #          gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
       #          gpg --verify phive.phar.asc phive.phar
     - name: 'Install PHIVE tools'
-      run: ./src/utils/retry.sh ./src/phive/install-tools.sh
+      run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install-tools.sh
       shell: 'bash'
       # TODO: When "uses" becomes available, replace the above with the following
       #    - name: 'Install PHIVE tools'
