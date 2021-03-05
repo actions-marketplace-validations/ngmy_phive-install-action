@@ -4,6 +4,7 @@ PHIVE Install Action is a GitHub Action to download [PHIVE](https://phar.io/), i
 ## Requirements
 PHIVE Install Action has the following requirements:
 
+* Bash
 * PHP
 
 ## Usage
