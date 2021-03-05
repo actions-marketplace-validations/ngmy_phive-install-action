@@ -1,18 +1,12 @@
 name: 'Install PHIVE tools'
 author: 'Yuta Nagamiya'
-description: 'Installs PHIVE tools and uploads them to the artifact store'
+description: 'Downloads PHIVE, installs tools, and uploads them to the artifact store'
 branding:
   icon: 'download'
   color: 'purple'
 runs:
   using: 'composite'
   steps:
-    - name: 'Check out repository'
-      run: ${{ github.action_path }}/src/git/checkout.sh
-      shell: 'bash'
-      # TODO: When "uses" becomes available, replace the above with the following
-      # - name: 'Check out repository'
-      #   uses: 'actions/checkout@v2'
     - name: 'Install PHIVE'
       run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install.sh
       shell: 'bash'
@@ -27,11 +21,11 @@ runs:
       #          wget -O phive.phar.asc https://phar.io/releases/phive.phar.asc
       #          gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
       #          gpg --verify phive.phar.asc phive.phar
-    - name: 'Install PHIVE tools'
+    - name: 'Install tools'
       run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install-tools.sh
       shell: 'bash'
       # TODO: When "uses" becomes available, replace the above with the following
-      #    - name: 'Install PHIVE tools'
+      #    - name: 'Install tools'
       #      uses: 'nick-invision/retry@v2'
       #      with:
       #        timeout_minutes: 10
@@ -41,7 +35,7 @@ runs:
       #          php phive.phar --no-progress install \
       #            --copy
       # TODO: When "uses" is available, add the following
-      #    - name: 'Upload PHIVE tools to artifact store'
+      #    - name: 'Upload tools to artifact store'
       #      uses: 'actions/upload-artifact@master'
       #      with:
       #        name: 'tools'

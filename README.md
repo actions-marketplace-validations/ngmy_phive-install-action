@@ -1,5 +1,5 @@
 # PHIVE Install Action
-PHIVE Install Action is a GitHub Action to install [PHIVE](https://phar.io/) tools using the `phars.xml` file in your repository and upload them to the artifact store.
+PHIVE Install Action is a GitHub Action to download [PHIVE](https://phar.io/), install tools using the `phars.xml` file in your repository, and upload them to the artifact store.
 
 ## Requirements
 PHIVE Install Action has the following requirements:
@@ -7,19 +7,21 @@ PHIVE Install Action has the following requirements:
 * PHP
 
 ## Usage
-Use PHIVE Install Action as step within a job as follows:
+Use PHIVE Install Action as a step in the job after the checkout step of your repository, as follows:
 ```yaml
 - name: Install tools
   uses: ngmy/phive-install-action@master
 ```
 
-You can also upload PHIVE tools to the artifact store for use in subsequent jobs as follows:
+You can also upload tools to the artifact store for use in subsequent jobs, as follows:
 ```yaml
 jobs:
   install_tools:
     name: Install tools
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
       - name: Install tools
         uses: ngmy/phive-install-action@master
       - name: Upload tools to artifact store
