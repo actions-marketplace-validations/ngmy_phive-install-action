@@ -42,6 +42,8 @@ jobs:
         with:
           name: tools
           path: tools
+      - name: Set tools as an executable
+        run: find tools -type f -print0 | xargs -0 chmod +x
 ```
 
 ## License
