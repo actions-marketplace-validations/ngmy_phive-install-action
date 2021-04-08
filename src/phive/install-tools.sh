@@ -1,5 +1,6 @@
 #!/bin/bash
 
 yes | \
-php phive.phar --no-progress install \
-  --copy
+./phive.phar --no-progress install \
+  --copy \
+  $*

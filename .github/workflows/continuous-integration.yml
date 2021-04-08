@@ -1,0 +1,82 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test_installing_tools:
+
+    runs-on: ubuntu-18.04
+
+    name: Test installing tools
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install tools
+        uses: ./
+
+      - name: Upload tools to artifact store
+        uses: actions/upload-artifact@master
+        with:
+          name: tools
+          path: tools
+
+  test_installing_tools_including_unsigned:
+
+    runs-on: ubuntu-18.04
+
+    name: Test installing tools including the unsigned
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up phars.xml to use
+        run: cp .phive/phars-including-unsigned.xml .phive/phars.xml
+
+      - name: Install tools including the unsigned
+        uses: ./
+        with:
+          phive-arguments: --force-accept-unsigned
+
+  test_installing_specified_unsigned_tool:
+
+    runs-on: ubuntu-18.04
+
+    name: Test installing the specified unsigned tool
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install the specified unsigned tool
+        uses: ./
+        with:
+          phive-arguments: --force-accept-unsigned humbug/box
+
+  test_using_tools:
+
+    needs: test_installing_tools
+
+    runs-on: ubuntu-18.04
+
+    name: Test using tools
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Download tools from artifact store
+        uses: actions/download-artifact@master
+        with:
+          name: tools
+          path: tools
+
+      - name: Set tools as an executable
+        run: find tools -type f -print0 | xargs -0 chmod +x
+
+      - name: Use tools
+        run: |
+          tools/phpcs --version
+          tools/phpunit --version
