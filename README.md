@@ -1,4 +1,6 @@
 # PHIVE Install Action
+[![CI](https://github.com/ngmy/phive-install-action/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/ngmy/phive-install-action/actions/workflows/continuous-integration.yml)
+
 PHIVE Install Action is a GitHub Action to download [PHIVE](https://phar.io/), install tools while automatically answering "y" to the "Import this key?" question, and upload them to the artifact store.
 
 ## Requirements
