@@ -50,7 +50,7 @@ jobs:
 
 ### Input Parameters
 #### phive-arguments
-PHIVE Install Action always passes the `--copy` option to the `phive install` command.
+PHIVE Install Action always passes the `--copy` option to the PHIVE `install` command.
 If you want to pass additional options or arguments, you can use the `phive-arguments` input parameter.
 
 For example:
