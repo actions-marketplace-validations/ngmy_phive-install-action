@@ -1,6 +1,10 @@
 name: 'Install PHIVE tools'
 author: 'Yuta Nagamiya'
 description: 'Downloads PHIVE, installs tools, and uploads them to the artifact store'
+inputs:
+  phive-arguments:
+    description: 'Additional arguments to pass to PHIVE'
+    required: false
 branding:
   icon: 'download'
   color: 'purple'
@@ -22,7 +26,7 @@ runs:
       #          gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
       #          gpg --verify phive.phar.asc phive.phar
     - name: 'Install tools'
-      run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install-tools.sh
+      run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install-tools.sh ${{ inputs.phive-arguments }}
       shell: 'bash'
       # TODO: When "uses" becomes available, replace the above with the following
       #    - name: 'Install tools'
