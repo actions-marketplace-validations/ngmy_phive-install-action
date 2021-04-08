@@ -1,5 +1,5 @@
 # PHIVE Install Action
-PHIVE Install Action is a GitHub Action to download [PHIVE](https://phar.io/), install tools using the `phars.xml` file in your repository, and upload them to the artifact store.
+PHIVE Install Action is a GitHub Action to download [PHIVE](https://phar.io/), install tools while automatically answering "y" to the "Import this key?" question, and upload them to the artifact store.
 
 ## Requirements
 PHIVE Install Action has the following requirements:
@@ -44,6 +44,19 @@ jobs:
           path: tools
       - name: Set tools as an executable
         run: find tools -type f -print0 | xargs -0 chmod +x
+```
+
+### Input Parameters
+#### phive-arguments
+PHIVE Install Action always passes the `--copy` option to the `phive install` command.
+If you want to pass additional options or arguments, you can use the `phive-arguments` input parameter.
+
+For example:
+```yaml
+- name: Install tools
+  uses: ngmy/phive-install-action@master
+  with:
+    phive-arguments: --force-accept-unsigned vendor/unsigned-project
 ```
 
 ## License
