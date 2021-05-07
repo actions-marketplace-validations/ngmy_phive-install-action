@@ -1,7 +1,9 @@
 #!/bin/bash
 
-NEXT_WAIT_TIME=0
-until "$@" ; EXIT_STATUS="$?" ; [[ "${EXIT_STATUS}" -eq 0 || "${NEXT_WAIT_TIME}" -eq 3 ]]; do
-  sleep "$(( NEXT_WAIT_TIME++ ))"
+set -Ceuo pipefail
+
+next_wait_time=0
+until "$@" ; exit_status="$?" ; [[ "${exit_status}" -eq 0 || "${next_wait_time}" -eq 3 ]]; do
+  sleep "$(( next_wait_time++ ))"
 done
-exit "${EXIT_STATUS}"
+exit "${exit_status}"
