@@ -52,6 +52,7 @@ jobs:
 #### phive-arguments
 PHIVE Install Action always passes the `--copy` option to the PHIVE `install` command.
 If you want to pass additional options or arguments, you can use the `phive-arguments` input parameter.
+Since some sks servers have been shut down there needs to be an option to customize the keyserver for the phive installation. You can use the `phive-keyserver` input parameter.
 
 For example:
 ```yaml
