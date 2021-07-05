@@ -52,7 +52,6 @@ jobs:
 #### phive-arguments
 PHIVE Install Action always passes the `--copy` option to the PHIVE `install` command.
 If you want to pass additional options or arguments, you can use the `phive-arguments` input parameter.
-Since some sks servers have been shut down there needs to be an option to customize the keyserver for the phive installation. You can use the `phive-keyserver` input parameter.
 
 For example:
 ```yaml
@@ -60,6 +59,17 @@ For example:
   uses: ngmy/phive-install-action@master
   with:
     phive-arguments: --force-accept-unsigned vendor/unsigned-project
+```
+
+#### phive-keyserver
+If you want to change the GPG key server to use when installing PHIVE, you can use the `phive-keyserver` input parameter.
+
+For example:
+```yaml
+- name: Install tools
+  uses: ngmy/phive-install-action@master
+  with:
+    phive-keyserver: hkps://keyserver.ubuntu.com
 ```
 
 ## License
