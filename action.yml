@@ -12,7 +12,7 @@ runs:
   using: 'composite'
   steps:
     - name: 'Install PHIVE'
-      run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install.sh ${{ inputs.phive-keyserver:-hkps://keyserver.ubuntu.com }}
+      run: ${{ github.action_path }}/src/utils/retry.sh ${{ github.action_path }}/src/phive/install.sh ${{ inputs.phive-keyserver }}
       shell: 'bash'
       # TODO: When "uses" becomes available, replace the above with the following
       #    - name: 'Install PHIVE'
