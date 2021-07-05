@@ -80,3 +80,18 @@ jobs:
         run: |
           tools/phpcs --version
           tools/phpunit --version
+
+  test_installing_phive_with_specified_gpg_key_server:
+
+    runs-on: ubuntu-18.04
+
+    name: Test installing PHIVE with specified the GPG key server
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install tools
+        uses: ./
+        with:
+          phive-keyserver: hkps://keyserver.ubuntu.com
