@@ -5,6 +5,10 @@ inputs:
   phive-arguments:
     description: 'Additional arguments to pass to PHIVE'
     required: false
+  phive-keyserver:
+    description: 'The GPG key server to use when installing PHIVE'
+    required: false
+    default: 'hkps://keys.openpgp.org'
 branding:
   icon: 'download'
   color: 'purple'
